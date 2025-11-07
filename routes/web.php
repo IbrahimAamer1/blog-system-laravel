@@ -1,8 +1,10 @@
 <?php
-
+use App\Http\Controllers\BlogControler;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ThemeController;
+use App\Http\Controllers\SubscriberController;
+use App\Http\Controllers\ContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,15 +15,27 @@ use App\Http\Controllers\ThemeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+//theme routes
 Route::controller(ThemeController::class)->name('theme.')->group(function(){
     Route::get('/', 'index')->name('index');
     route::get('/category', 'category')->name('category');
     route::get('/contact', 'contact')->name('contact');
-    route::get('/login', 'login')->name('login');
-    route::get('/register', 'register')->name('register');
     route::get('/singleblog', 'singleblog')->name('singleblog');
 });
+
+//subscriber route
+Route::post('/subscribe/store', [SubscriberController::class, 'store'])->name('subscribe.store');
+//contact route
+Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.store');
+
+
+//blog routes
+route::resource('blog', BlogControler::class);
+
+
+
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -34,4 +48,3 @@ Route::middleware('auth')->group( function () {
 });
 
 require __DIR__.'/auth.php';
-    

@@ -1,4 +1,7 @@
- <!--================Header Menu Area =================-->
+@php
+$categories = App\Models\Category::get();
+@endphp
+<!--================Header Menu Area =================-->
  <header class="header_area">
     <div class="main_menu">
       <nav class="navbar navbar-expand-lg navbar-light">
@@ -14,32 +17,43 @@
           <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
             <ul class="nav navbar-nav menu_nav justify-content-center">
               <li class="nav-item @yield('active-home')"><a class="nav-link"
+
                href="{{route('theme.index')}}">Home</a></li> 
               <li class="nav-item @yield('active-category') submenu dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                   aria-expanded="false">Categories</a>
                 <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="{{route('theme.category')}}">Food</a></li>
-                  <li class="nav-item"><a class="nav-link" href="{{route('theme.category')}}">Bussiness</a></li>
-                  <li class="nav-item"><a class="nav-link" href="{{route('theme.category')}}">Travel</a></li>
+                  @foreach ($categories as $category)
+                  <li class="nav-item"><a class="nav-link" href="{{route('theme.category')}}">{{$category->name}}</a></li>
+                  @endforeach
                 </ul>
               </li>
               <li class="nav-item @yield('active-contact')"><a class="nav-link" href="{{route('theme.contact')}}">Contact</a></li>
             </ul>
             
             <!-- Add new blog -->
-            <a href="#" class="btn btn-sm btn-primary mr-2">Add New</a>
+            @auth
+            <a href="{{route('blog.create')}}" class="btn btn-sm btn-primary mr-2">Add New</a>
+            @endauth
             <!-- End - Add new blog -->
-
+            @guest
             <ul class="nav navbar-nav navbar-right navbar-social">
-              <a href="#" class="btn btn-sm btn-warning">Register / Login</a>
-              <!-- <li class="nav-item submenu dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                  aria-expanded="false">Welcome User</a>
-                <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="blog-details.html">My Blogs</a></li>
-                </ul>
-              </li> -->
+              <a href="{{route('register.post')}}" class="btn btn-sm btn-warning">Register / Login</a>
+              @endguest
+              @auth
+              <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="btn btn-sm btn-danger">Logout</button>
+              </form>
+
+                <li class="nav-item submenu dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    aria-expanded="false">{{ Auth::user()->name }}</a>
+                  <ul class="dropdown-menu">
+                    <li class="nav-item"><a class="nav-link" href="blog-details.html">My Blogs</a></li>
+                  </ul>
+                </li> 
+              @endauth
             </ul>
           </div> 
         </div>
