@@ -91,7 +91,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8">
-            @if($blogs->count() > 0)
+            @if( isset($blogs) && $blogs->count() > 0)
             @foreach($blogs as $blog)
             <div class="single-recent-blog-post">
               <div class="thumb">
@@ -108,10 +108,12 @@
                   </h3>
                 </a>
                 <p>{{$blog->description}}</p>
-                <a class="button" href="{{route('blog.show', ['id' => $blog->id])}} ">Read More <i class="ti-arrow-right"></i></a>
+                <a class="button" href= "{{ route('blog.show',  ['blog' => $blog]) }}" ">Read More <i class="ti-arrow-right"></i></a>
               </div>
             </div> 
-            @endforeach
+            @endforeach 
+            @else
+            <div class="alert alert-info">No blogs found</div>
             @endif
 
             

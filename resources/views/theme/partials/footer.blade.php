@@ -32,7 +32,7 @@
                 @enderror
             </div>
           </div>
-        </div>
+        </div>  
         <div class="col-lg-3  col-md-6 col-sm-6">
           <div class="single-footer-widget mail-chimp">
             <h6 class="mb-20">Instragram Feed</h6>

@@ -18,7 +18,7 @@ use App\Http\Controllers\ContactController;
 //theme routes
 Route::controller(ThemeController::class)->name('theme.')->group(function(){
     Route::get('/', 'index')->name('index');
-    route::get('/category', 'category')->name('category');
+    route::get('/category/{id}', 'category')->name('category');
     route::get('/contact', 'contact')->name('contact');
     route::get('/singleblog', 'singleblog')->name('singleblog');
 });
@@ -30,8 +30,8 @@ Route::post('/contact/store', [ContactController::class, 'store'])->name('contac
 
 
 //blog routes
+route::get('/my-blogs', [BlogControler::class, 'myBlogs'])->name('blog.my-blogs');
 route::resource('blog', BlogControler::class);
-
 
 
 

@@ -1,5 +1,6 @@
 @php
 $categories = App\Models\Category::get();
+
 @endphp
 <!--================Header Menu Area =================-->
  <header class="header_area">
@@ -24,7 +25,7 @@ $categories = App\Models\Category::get();
                   aria-expanded="false">Categories</a>
                 <ul class="dropdown-menu">
                   @foreach ($categories as $category)
-                  <li class="nav-item"><a class="nav-link" href="{{route('theme.category')}}">{{$category->name}}</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{{route('theme.category' ,['id' => $category->id])}}">{{$category->name}}</a></li>
                   @endforeach
                 </ul>
               </li>
@@ -50,7 +51,7 @@ $categories = App\Models\Category::get();
                   <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                     aria-expanded="false">{{ Auth::user()->name }}</a>
                   <ul class="dropdown-menu">
-                    <li class="nav-item"><a class="nav-link" href="blog-details.html">My Blogs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('blog.my-blogs') }}">My Blogs</a></li>
                   </ul>
                 </li> 
               @endauth

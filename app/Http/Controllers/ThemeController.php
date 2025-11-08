@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use App\Models\Category;
 class ThemeController extends Controller
 {
     public function index(){
@@ -11,8 +12,10 @@ class ThemeController extends Controller
         return view("theme.index", compact('blogs'));
 
     }
-    public function category(){
-        return view("theme.category");
+    public function category(int $id){
+        $categoryName = Category::find($id)->name;
+        $blogs = Blog::where('category_id', $id)->paginate(4);
+        return view("theme.category" , compact('blogs'));
     }
 
     public function contact(){
@@ -25,13 +28,9 @@ class ThemeController extends Controller
             return view("theme.register");
         }
         public function singleblog(){
-            $blog = Blog::find(request()->id);
-            if(!$blog){
-                return redirect()->route("theme.index");
-            }
-            $blogs = Blog::paginate(4);
-            return view("theme.singleblog", compact('blog', 'blogs'));
+            return view("theme.singleblog");
         }
+        
       
 }
 

@@ -52,9 +52,10 @@ class BlogControler extends Controller
      */
     public function show(Blog $blog)
     {
-     return view("theme.singleblog", compact('blog'));
+     return view("theme.singleblog",compact('blog'));
     }
 
+    
     /**
      * Show the form for editing the specified resource.
      */
@@ -76,6 +77,19 @@ class BlogControler extends Controller
      */
     public function destroy(Blog $blog)
     {
-        //
+        $blog->delete();
+        return redirect()->back()->with('blog_deleted', 'Blog deleted successfully');
+    }
+     /**
+     * Display all the blogs of the user.
+     */
+    public function myBlogs()
+    {
+        if(Auth::check()){
+            $blogs = Blog::where('user_id', Auth::user()->id)->get();
+            return view('theme.blogs.my-blogs', compact('blogs'));
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 }

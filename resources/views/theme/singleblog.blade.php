@@ -1,11 +1,7 @@
-@php
-    $blog = App\Models\Blog::find(request()->id);
-@endphp
-
 @extends('theme.master')
 @section('title', 'Single Blog')
 @section('content')
-@include( 'theme.partials.hero',  ['title' => 'Single Blog'])
+@include( 'theme.partials.hero',  ['title' => $blog->name ?? 'Single Blog'])
 
   <!--================ Start Blog Post Area =================-->
   <section class="blog-post-area section-margin">
@@ -15,8 +11,8 @@
         
         
             <div class="main_blog_details">
-                @if($blog)
-                <img class="img-fluid" src="{{ asset('storage/blogs/'.$blog->image) }}" alt="">
+                @if(isset($blog))
+                <img class="img-fluid" src="{{asset('storage/blogs/'.$blog->image)}}" alt="">
                 <a href="#"><h4>{{$blog->name}}</h4></a>
                 <div class="user_details">
                   <div class="float-right mt-sm-0 mt-3">
