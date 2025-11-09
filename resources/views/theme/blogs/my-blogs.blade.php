@@ -15,7 +15,11 @@
                             {{ session('blogDeleteStatus') }}
                         </div>
                     @endif
-
+                    @if(session('blog_deleted'))
+                        <div class="alert alert-success">
+                            {{ session('blog_deleted') }}
+                        </div>
+                    @endif
                     <table class="table">
                         <thead>
                             <tr>
@@ -33,6 +37,7 @@
                                         </td>
                                         <td>
                                             <a href="{{ route('blog.edit', ['blog' => $blog]) }}"
+                                                target="_blank" 
                                                 class="btn btn-sm btn-primary mr-2">Edit</a>
                                             <form action="{{ route('blog.destroy', ['blog' => $blog]) }}" method="post"
                                                 id="delete_form" class="d-inline">
