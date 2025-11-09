@@ -1,3 +1,91 @@
+# Laravel Blog System
+
+Laravel-based blogging platform featuring public-facing pages, blog management tools, and user engagement workflows such as comments, newsletter subscriptions, and contact forms.
+
+## Features
+- Public landing page with featured slider and category filtering for blog discovery.
+- Authenticated blog authoring: create, edit, update images, and delete posts with ownership checks.
+- Category-specific listings and dedicated single-post view displaying comments.
+- Newsletter subscription handling backed by validation and persistent storage.
+- Contact form submissions captured through server-side validation.
+- Comment submission flow with validation for reader engagement.
+
+## Tech Stack
+- PHP 8.1+
+- Laravel 10 framework with Laravel Breeze authentication scaffolding
+- MySQL (or any Laravel-supported database) for persistence
+- Laravel Sanctum for API/session security foundations
+- Laravel Sail (optional) for containerized local setup
+- Laravel Pint and PHPUnit for code style and automated testing
+
+## Getting Started
+
+### Prerequisites
+- PHP 8.1 or newer with required extensions (`openssl`, `pdo`, `mbstring`, `tokenizer`, `xml`, `ctype`, `json`, `bcmath`, `fileinfo`)
+- Composer
+- Node.js & npm (for compiling front-end assets if you customize styles/scripts)
+- A MySQL-compatible database
+
+### Installation
+1. Clone the repository and install PHP dependencies:
+   ```sh
+   git clone https://github.com/your-org/blog-system.git
+   cd blog-system
+   composer install
+   ```
+2. Copy the environment template and generate the application key:
+   ```sh
+   cp .env.example .env
+   php artisan key:generate
+   ```
+3. Configure `.env` with your database credentials, mail settings (for contact confirmations if desired), and other environment-specific values.
+4. Run database migrations (and seeds if you add them):
+   ```sh
+   php artisan migrate
+   ```
+5. (Optional) Link the storage directory if you plan to upload blog images:
+   ```sh
+   php artisan storage:link
+   ```
+6. Install front-end dependencies and compile assets:
+   ```sh
+   npm install
+   npm run dev
+   ```
+
+### Running the Application
+- Start the local development server:
+  ```sh
+  php artisan serve
+  ```
+- Visit `http://localhost:8000` in your browser to explore the theme pages.
+- Authenticate via Laravel Breeze routes to access authoring features (`/login`, `/register`).
+
+## Project Structure Highlights
+- `routes/web.php` – route registrations for theme pages, blog CRUD, comments, subscriptions, and contact form.
+- `app/Http/Controllers` – controllers handling theme views, blog management, comment persistence, and supporting flows.
+- `app/Http/Requests` – form request classes encapsulating validation rules for blogs, comments, subscribers, and contact submissions.
+- `resources/views/theme` – Blade templates for the theme layout, including partials and blog presentation components.
+
+## Testing & Quality
+- Run PHPUnit tests (add suites as needed):
+  ```sh
+  php artisan test
+  ```
+- Enforce code style with Laravel Pint:
+  ```sh
+  ./vendor/bin/pint
+  ```
+
+## Deployment Notes
+- Ensure `APP_ENV=production` and `APP_DEBUG=false` in `.env`.
+- Configure queue, cache, and filesystem drivers according to your infrastructure.
+- Set up a scheduler for periodic tasks (`php artisan schedule:run`) if you enable queued emails or other cron-based features.
+- Serve the application via a production-ready web server (e.g., Nginx/Apache) pointing to the `public` directory.
+
+## License
+
+This project is released under the MIT License. See the `LICENSE` file for more information.
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">

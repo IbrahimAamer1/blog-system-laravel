@@ -50,12 +50,12 @@ $blogs = App\Models\Blog::orderBy('created_at', 'desc')->take(3)->get();
                       <div class="thumb">
                         <img class="card-img rounded-0" src="{{asset('storage/blogs/'.$blog->image)}}" alt="">
                         <ul class="thumb-info">
-                          <li><a href="{{route('theme.singleblog', $blog->id)}}">{{$blog->user->name}}</a></li>
-                          <li><a href="{{route('theme.singleblog', $blog->id)}}">{{$blog->created_at->format('d M Y')}}</a></li>
+                          <li><a href={{ $blog->user->name }}</a></li>
+                          <li><a href= {{ $blog->created_at->format('d M Y') }}> {{ $blog->created_at->format('d M Y') }}</a></li>
                         </ul>
-                      </div>
+                      </div> 
                       <div class="details mt-20">
-                        <a href="{{route('theme.singleblog', $blog->id)}}">
+                        <a href="{{route('blog.show', $blog->id)}}">
                           <h6>{{$blog->name}}</h6>
                         </a>
                       </div>
